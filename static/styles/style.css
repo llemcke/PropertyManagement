@@ -21,6 +21,9 @@ body {
   z-index:1;
   background-color: rgb(42, 115, 146,0.9);
 }
+.container{
+  z-index:1;
+}
 .video-container{
   position: absolute;
   top:0;

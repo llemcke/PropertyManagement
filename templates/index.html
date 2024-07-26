@@ -16,6 +16,12 @@
   </head>
   
   <body> 
+    <div class="container">
+      {% if message %}
+          <div class="alert alert-danger">
+              {{ message }}
+          </div>
+      {% endif %}
     <div class="video-container">
     <video autoplay muted loop id="myVideo">
     <source src="/static/background.mp4" type="video/mp4">
@@ -49,16 +55,19 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form method="post" action="{{url_for('tenantLogIn')}}">
           <div class="modal-body">
-            <label name="userLabel" for="user" class="col-md-1 col-form-label " style="font-weight: bold; padding: 2px">Username:</label>
-            <input id="user" type="user" value="" class="form-control" name="user"  required >
-            <label name="passwordLabel" for="loc" class="col-md-1 col-form-label " style="font-weight: bold; padding: 2px">Password:</label>
+            <label name="userLabel" for="username" class="col-md-1 col-form-label " style="font-weight: bold; padding: 2px">Username:</label>
+            <input id="username" type="text" value="" class="form-control" name="username"  required >
+            <label name="passwordLabel" for="password" class="col-md-1 col-form-label " style="font-weight: bold; padding: 2px">Password:</label>
             <input id="password" type="password" value="" class="form-control" name="password" required >
           </div>
           <div class="modal-footer">
-            <form method="post" action="{{url_for('tenantLogIn')}}">
-            <button type="submit" name="tenantLogIn" class="btn btn-primary">Login</button></form>
+            
+            <button type="submit" name="tenantLogIn" class="btn btn-primary">Login</button>
+          
           </div>
+        </form>
         </div>
       </div>
     </div>
@@ -72,17 +81,20 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form method="post" action="{{url_for('landlordLogIn')}}">
           <div class="modal-body">
             <label name="userLabel" for="user" class="col-md-1 col-form-label " style="font-weight: bold; padding: 2px">Username:</label>
-            <input id="user" type="user" value="" class="form-control" name="user"  required >
+            <input id="user" type="usernameL" value="" class="form-control" name="usernameL"  required >
             <label name="passwordLabel" for="loc" class="col-md-1 col-form-label " style="font-weight: bold; padding: 2px">Password:</label>
-            <input id="password" type="password" value="" class="form-control" name="password" required >
+            <input id="passwordL" type="password" value="" class="form-control" name="passwordL" required >
           </div>
           <div class="modal-footer">
-            <form method="post" action="{{url_for('landlordLogIn')}}">
-            <button type="submit" name="landlordLogIn" class="btn btn-primary">Login</button></form>
+            
+            <button type="submit" name="landlordLogIn" class="btn btn-primary">Login</button>
           </div>
+        </form>
         </div>
+      
       </div>
     </div>
   

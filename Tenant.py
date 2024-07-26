@@ -1,4 +1,4 @@
-import System
+
 class Tenant():
     def __init__(self, userID:int,first_name:str,last_name:str, address:str, unit:str, rentAmount:float):
         self.ID=userID
@@ -17,14 +17,14 @@ class Tenant():
     def getRentAmount(self):
         return self.rentAmount
     
-    def updateRentOwed(self,rentPaid:float,):
+    def updateRentOwed(self,supabase,rentPaid:float,)->float:
         '''
-        handles when rent payment is made by tenant
+        handles when rent payment is made by tenant, updates rent owed
         '''
-        supabase = System.get_client.get_client()
-        response = (
-        supabase.table("Tenant")
-        .update({"rent_owing": self.rentAmount-rentPaid})
-        .eq("user_id", self.ID)
-        .execute()
-        )
+        
+        response = supabase.table("Tenant").select('rent_owing').eq("user_id", self.ID).execute()
+        user=response.data[0]
+        current_owing = user['rent_owing']
+        new_owing = current_owing - rentPaid
+        supabase.table("Tenant").update({"rent_owing": new_owing}).eq("user_id", self.ID).execute()
+        return new_owing
